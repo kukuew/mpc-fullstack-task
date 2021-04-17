@@ -18,7 +18,6 @@ class MPC_FT {
 
     public function __construct() {
         $this->includes();
-        $this->init_hooks();
     }
 
     public function includes() {
@@ -33,10 +32,5 @@ class MPC_FT {
             include_once MPC_FT_ABSPATH . '/inc/mpc-ft-template-functions.php';
         }
     }
-
-    private function init_hooks() {
-
-    }
-
 
 }

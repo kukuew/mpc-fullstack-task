@@ -43,6 +43,7 @@ $dummy_data = array(
                     <div class="mpc-ft-todo__col-text">
                         <input class="mpc-ft-todo__input-text" type="text" value="<?php echo $data['text']; ?>">
                     </div>
+                    <button class="mpc-ft-todo__remove has-background" type="button" aria-label="<?php _e( 'Remove item', 'mpc-ft' ); ?>"></button>
                 </li>
             <?php
             endforeach; ?>
