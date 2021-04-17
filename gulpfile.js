@@ -18,6 +18,11 @@ const js_files = [
     '!./assets/js/modules/**/*.js'
 ];
 
+const js_files_watch = [
+    './assets/js/**/*.js',
+    '!./assets/js/**/*.min.js'
+];
+
 const scripts = () => {
     return (
         gulp.src( js_files, {read: false} )
@@ -56,7 +61,7 @@ const styles = () => {
 exports.styles = styles;
 
 const watch = () => {
-    gulp.watch( js_files, scripts );
+    gulp.watch( js_files_watch, scripts );
     gulp.watch( css_files, styles );
 }
 

@@ -98,15 +98,19 @@
 
         &:focus {
             outline: none;
+            color: #8B8F97;
         }
     }
 
     &__input-text--add[type="text"] {
         margin-top: 15px;
-        color: #C0C6D2;
 
-        &:focus {
+        &::placeholder {
             color: #C0C6D2;
+        }
+
+        &:invalid {
+            box-shadow: none;
         }
     }
 
