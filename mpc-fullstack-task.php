@@ -34,9 +34,6 @@ if ( ! defined( 'MPC_FT_PLUGIN_VERSION' ) ) {
 // Include the main plugin class.
 if ( ! class_exists( 'MPC_FT' ) ) {
     include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft.php';
-
-    // Initialize
-    add_action( 'plugins_loaded', 'MPC_FT::instance' );
 }
 
 

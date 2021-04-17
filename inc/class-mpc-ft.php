@@ -7,21 +7,15 @@ defined( 'ABSPATH' ) || exit;
 
 class MPC_FT {
 
-    protected static $_instance;
+    public static function init() {
+        self::includes();
 
-    public static function instance() {
-        if ( is_null( self::$_instance ) ) {
-            self::$_instance = new self();
-        }
-        return self::$_instance;
+        register_activation_hook( MPC_FT_PLUGIN_FILE, array( 'MPC_FT_Install', 'activation' ) );
     }
 
-    public function __construct() {
-        $this->includes();
-    }
-
-    public function includes() {
+    public static function includes() {
         include_once MPC_FT_ABSPATH . '/inc/mpc-ft-core-functions.php';
+        include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-install.php';
         include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-post-types.php';
         include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-template-loader.php';
         include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-meta-box.php';
@@ -35,3 +29,5 @@ class MPC_FT {
     }
 
 }
+
+MPC_FT::init();
