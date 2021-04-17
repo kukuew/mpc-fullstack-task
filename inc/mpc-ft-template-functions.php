@@ -17,7 +17,37 @@ function mpc_ft_body_class( $classes ) {
 }
 
 function mpc_ft_get_todo_items() {
-    return get_post_meta( get_the_ID(), 'mpc_ft_todo_items', true );
+    $post_id = get_the_ID();
+    $meta_key = 'mpc_ft_todo_items';
+
+    $items = get_post_meta( $post_id, $meta_key, true );
+
+    if ( empty( $items ) && ! metadata_exists( 'post', $post_id, $meta_key ) ) {
+        $items = mpc_ft_get_todo_dummy_items();
+    }
+
+    return $items;
+}
+
+function mpc_ft_get_todo_dummy_items() {
+    return array(
+        array(
+            'checkbox' => true,
+            'text'     => 'Hello!'
+        ),
+        array(
+            'checkbox' => true,
+            'text'     => 'This is dummy content'
+        ),
+        array(
+            'checkbox' => false,
+            'text'     => 'Unchecked example'
+        ),
+        array(
+            'checkbox' => true,
+            'text'     => 'Code is poetry'
+        )
+    );
 }
 
 function mpc_ft_todo_item_template() {
