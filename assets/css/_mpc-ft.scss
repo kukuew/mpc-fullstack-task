@@ -20,7 +20,7 @@
 
         &--full-screen {
             padding: 30vh 0;
-            min-height: 100vh;
+            min-height: calc(100vh - 60px);
         }
     }
 }
