@@ -1,0 +1,106 @@
+.mpc-ft-todo {
+    width: 100%;
+    max-width: 253px;
+    min-width: 200px;
+    border: 1px solid #E0DCDC;
+    border-radius: 2px;
+    box-shadow: 0 2px 3px -2px #000;
+
+    &__add {
+        background-color: #F3F3F3;
+    }
+
+    &__form {
+        display: flex;
+    }
+
+    &__col-checkbox {
+        padding: 0 13px;
+        width: 17.4%;
+        background: linear-gradient(to left,#F3E3DF 1px,transparent 1px, transparent 3px,#F3E3DF 3px,#F3E3DF 4px, transparent 4px);
+    }
+
+    &__col-text {
+        padding: 0 10px;
+        width: 82.6%;
+    }
+
+    &__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    &__item {
+        display: flex;
+        background-color: #FFF;
+        border-top: 1px solid #E6EBED;
+    }
+
+    &__input-checkbox[type="checkbox"] {
+        margin: 7px 0;
+        padding: 0;
+        appearance: none;
+        position: relative;
+        width: 17px;
+        height: 17px;
+        background: #FAF9F9;
+        border: 1px solid #6BB3CA;
+        border-radius: 2px;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::after {
+            content: "";
+            display: block;
+            width: 6px;
+            height: 11px;
+            border: 3px solid #CCCECF;
+            border-top: 0;
+            border-left: 0;
+            position: absolute;
+            top: 1px;
+            left: 5px;
+            transform: rotate(40deg);
+            opacity: 0;
+        }
+
+        &:checked {
+            border: 1px solid #C8C8C8;
+
+            &::after {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__input-checkbox--add[type="checkbox"] {
+        margin-top: 15px;
+    }
+
+    &__input-text[type="text"] {
+        margin: 7px 0;
+        padding: 0;
+        appearance: none;
+        border: none;
+        background-color: transparent;
+        font-size: 14px;
+        line-height: 1;
+        color: #8B8F97;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__input-text--add[type="text"] {
+        margin-top: 15px;
+        color: #C0C6D2;
+
+        &:focus {
+            color: #C0C6D2;
+        }
+    }
+}
