@@ -14,6 +14,12 @@ class MPC_FT_Todo_Data_Storage {
         return this._items;
     }
 
+    get_item( index ) {
+        let items = this.get_items();
+
+        return items[ index ];
+    }
+
     add_item( item ) {
         let items = this.get_items();
 
@@ -27,6 +33,15 @@ class MPC_FT_Todo_Data_Storage {
         let items = this.get_items();
 
         items.splice( index, 1 );
+
+        this._items = items;
+        this.save();
+    }
+
+    update_item( index, item ) {
+        let items = this.get_items();
+
+        items[ index ] = item;
 
         this._items = items;
         this.save();
