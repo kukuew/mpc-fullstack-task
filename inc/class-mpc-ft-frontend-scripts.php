@@ -21,9 +21,10 @@ class MPC_FT_Frontend_Scripts {
         wp_enqueue_script( 'mpc_ft', self::get_asset_url( 'assets/js/main.min.js' ), array( 'wp-util' ), MPC_FT_PLUGIN_VERSION, true );
 
         wp_localize_script( 'mpc_ft', 'mpc_ft', array(
-            'ajax_url' => admin_url( 'admin-ajax.php' ),
-            'nonce' => wp_create_nonce( MPC_FT_PLUGIN_FILE ),
-            'todo_items' => mpc_ft_get_todo_items()
+            'ajax_url'   => admin_url( 'admin-ajax.php' ),
+            'nonce'      => wp_create_nonce( MPC_FT_PLUGIN_FILE ),
+            'todo_items' => mpc_ft_get_todo_items(),
+            'post_id'    => get_the_ID()
         ) );
     }
 

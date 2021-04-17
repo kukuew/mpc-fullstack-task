@@ -25,11 +25,12 @@ class MPC_FT {
         include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-post-types.php';
         include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-template-loader.php';
         include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-meta-box.php';
+        include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-ajax.php';
 
         if ( ! is_admin() ) {
-            include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-frontend-scripts.php';
             include_once MPC_FT_ABSPATH . '/inc/mpc-ft-template-hooks.php';
             include_once MPC_FT_ABSPATH . '/inc/mpc-ft-template-functions.php';
+            include_once MPC_FT_ABSPATH . '/inc/class-mpc-ft-frontend-scripts.php';
         }
     }
 

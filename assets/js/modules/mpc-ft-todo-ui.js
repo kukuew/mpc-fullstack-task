@@ -13,7 +13,10 @@ class MPC_FT_Todo_UI {
         let i = 0;
         for ( let item of items ) {
             item.i = i;
-            this.list.innerHTML += this.template( item );
+            this.list.innerHTML += this.template( {
+                i: i,
+                item: item
+            } );
             i++;
         }
     }

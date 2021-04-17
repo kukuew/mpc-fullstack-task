@@ -1,4 +1,10 @@
+const MPC_FT_Ajax = require( './mpc-ft-ajax' );
+
 class MPC_FT_Todo_Data_Storage {
+
+    constructor() {
+        this.ajax = new MPC_FT_Ajax();
+    }
 
     get_items() {
         if ( undefined === this._items ) {
@@ -14,6 +20,7 @@ class MPC_FT_Todo_Data_Storage {
         items.unshift( item );
 
         this._items = items;
+        this.save();
     }
 
     remove_item( index ) {
@@ -22,6 +29,13 @@ class MPC_FT_Todo_Data_Storage {
         items.splice( index, 1 );
 
         this._items = items;
+        this.save();
+    }
+
+    save() {
+        let items = this.get_items();
+
+        this.ajax.save_todo_items( items );
     }
 
 }
