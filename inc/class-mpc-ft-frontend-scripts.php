@@ -17,6 +17,7 @@ class MPC_FT_Frontend_Scripts {
             return;
         }
 
+        wp_enqueue_style( 'font_open_sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap' );
         wp_enqueue_style( 'mpc_ft', self::get_asset_url( 'assets/css/main.min.css' ), '', MPC_FT_PLUGIN_VERSION );
         wp_enqueue_script( 'mpc_ft', self::get_asset_url( 'assets/js/main.min.js' ), array( 'wp-util' ), MPC_FT_PLUGIN_VERSION, true );
 
