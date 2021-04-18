@@ -4,6 +4,7 @@ const MPC_FT_Todo_UI = require( './mpc-ft-todo-ui' );
 class MPC_FT_Todo {
     constructor( element ) {
         this.todo = element;
+        this.typing = false;
         this.form = this.todo.querySelector( '.js-mpc-ft-form' );
         this.list = this.todo.querySelector( '.js-mpc-ft-list' );
         this.data_storage = new MPC_FT_Todo_Data_Storage();
@@ -32,8 +33,7 @@ class MPC_FT_Todo {
             return;
         }
 
-        let li_item = e.target.closest( '.js-mpc-ft-item' );
-        let index = li_item.dataset.index;
+        let index = this.get_item_index( e.target );
 
         this.data_storage.remove_item( index );
         this.ui.output_items( this.data_storage.get_items() );
@@ -44,8 +44,7 @@ class MPC_FT_Todo {
             return;
         }
 
-        let li_item = e.target.closest( '.js-mpc-ft-item' );
-        let index = li_item.dataset.index;
+        let index = this.get_item_index( e.target );
         let item = this.data_storage.get_item( index );
 
         item.checkbox = false === item.checkbox;
@@ -58,13 +57,15 @@ class MPC_FT_Todo {
             return;
         }
 
-        let li_item = e.target.closest( '.js-mpc-ft-item' );
-        let index = li_item.dataset.index;
+        let index = this.get_item_index( e.target );
         let item = this.data_storage.get_item( index );
 
         item.text = e.target.value;
 
-        this.data_storage.update_item( index, item );
+        clearTimeout( this.typing );
+        this.typing = setTimeout( () => {
+            this.data_storage.update_item( index, item );
+        }, 500 );
     }
 
     save_form_data() {
@@ -79,6 +80,12 @@ class MPC_FT_Todo {
         item.text = form_data.get( 'text' );
 
         this.data_storage.add_item( item );
+    }
+
+    get_item_index( element ) {
+        let li_item = element.closest( '.js-mpc-ft-item' );
+
+        return li_item.dataset.index;
     }
 }
 
