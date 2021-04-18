@@ -1,12 +1,12 @@
 .mpc-ft-hide-wp-ui {
     background-color: rgb(240, 240, 240);
-}
 
-.admin-bar.mpc-ft-hide-wp-ui {
-    .mpc-ft {
-        &__inner {
-            &--full-screen {
-                min-height: calc(100vh - 92px);
+    &.admin-bar {
+        .mpc-ft {
+            &__inner {
+                &--full-screen {
+                    min-height: calc(100vh - 92px);
+                }
             }
         }
     }

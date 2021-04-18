@@ -1,17 +1,22 @@
 <?php
+/**
+ * Core function
+ */
 
-function mpc_ft_get_template_part( $slug, $return = false ) {
-    ob_start();
+defined( 'ABSPATH' ) || exit;
 
-    load_template( MPC_FT_ABSPATH . "templates/{$slug}.php", false );
-
-    $template = ob_get_clean();
-
-    if ( $return ) {
-        return $template;
-    } else {
-        echo $template;
+function mpc_ft_get_template( $slug, $args = array() ) {
+    if ( ! empty( $args ) && is_array( $args ) ) {
+        extract( $args );
     }
+
+    $template = MPC_FT_ABSPATH . "templates/{$slug}.php";
+
+    if ( ! file_exists( $template ) ) {
+        return false;
+    }
+
+    include $template;
 }
 
 function mpc_ft_is_wp_ui() {

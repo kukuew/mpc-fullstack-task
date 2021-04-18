@@ -2,7 +2,7 @@
 /**
  * Post Types
  *
- * Registers post types and taxonomies.
+ * Registers post types.
  *
  */
 

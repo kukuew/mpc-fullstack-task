@@ -2,8 +2,8 @@ class MPC_FT_Todo_UI {
 
     constructor( element ) {
         this.todo = element;
-        this.form = this.todo.querySelector( '.mpc-ft-todo__form' );
-        this.list = this.todo.querySelector( '.mpc-ft-todo__list' );
+        this.form = this.todo.querySelector( '.js-mpc-ft-form' );
+        this.list = this.todo.querySelector( '.js-mpc-ft-list' );
         this.template = wp.template( 'mpc-ft-todo-item' );
     }
 

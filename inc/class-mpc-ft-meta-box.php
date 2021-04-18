@@ -1,6 +1,6 @@
 <?php
 /**
- * Meta Boxes
+ * Meta Boxe
  *
  */
 

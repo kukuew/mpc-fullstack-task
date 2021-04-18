@@ -4,8 +4,8 @@ const MPC_FT_Todo_UI = require( './mpc-ft-todo-ui' );
 class MPC_FT_Todo {
     constructor( element ) {
         this.todo = element;
-        this.form = this.todo.querySelector( '.mpc-ft-todo__form' );
-        this.list = this.todo.querySelector( '.mpc-ft-todo__list' );
+        this.form = this.todo.querySelector( '.js-mpc-ft-form' );
+        this.list = this.todo.querySelector( '.js-mpc-ft-list' );
         this.data_storage = new MPC_FT_Todo_Data_Storage();
         this.ui = new MPC_FT_Todo_UI( this.todo );
 
@@ -28,11 +28,11 @@ class MPC_FT_Todo {
     }
 
     on_remove( e ) {
-        if ( ! e.target.classList.contains( 'mpc-ft-todo__remove' ) ) {
+        if ( ! e.target.classList.contains( 'js-mpc-ft-remove' ) ) {
             return;
         }
 
-        let li_item = e.target.closest( '.mpc-ft-todo__item' );
+        let li_item = e.target.closest( '.js-mpc-ft-item' );
         let index = li_item.dataset.index;
 
         this.data_storage.remove_item( index );
@@ -40,11 +40,11 @@ class MPC_FT_Todo {
     }
 
     on_change_checkbox( e ) {
-        if ( ! e.target.classList.contains( 'mpc-ft-todo__input-checkbox' ) ) {
+        if ( ! e.target.classList.contains( 'js-mpc-ft-input-checkbox' ) ) {
             return;
         }
 
-        let li_item = e.target.closest( '.mpc-ft-todo__item' );
+        let li_item = e.target.closest( '.js-mpc-ft-item' );
         let index = li_item.dataset.index;
         let item = this.data_storage.get_item( index );
 
@@ -54,11 +54,11 @@ class MPC_FT_Todo {
     }
 
     on_change_text( e ) {
-        if ( ! e.target.classList.contains( 'mpc-ft-todo__input-text' ) ) {
+        if ( ! e.target.classList.contains( 'js-mpc-ft-input-text' ) ) {
             return;
         }
 
-        let li_item = e.target.closest( '.mpc-ft-todo__item' );
+        let li_item = e.target.closest( '.js-mpc-ft-item' );
         let index = li_item.dataset.index;
         let item = this.data_storage.get_item( index );
 

@@ -49,7 +49,11 @@ class MPC_FT_Template_Loader {
             return $content;
         }
 
-        return mpc_ft_get_template_part( 'content-todo', true );
+        ob_start();
+        mpc_ft_get_template( 'content-todo' );
+        $content = ob_get_clean();
+
+        return $content;
     }
 
 }

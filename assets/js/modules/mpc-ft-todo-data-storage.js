@@ -48,9 +48,23 @@ class MPC_FT_Todo_Data_Storage {
     }
 
     save() {
-        let items = this.get_items();
+        let items = this.sanitize_items( this.get_items() );
 
         this.ajax.save_todo_items( items );
+    }
+
+    sanitize_items( items ) {
+        for ( let i = 0; items.length > i; i++ ) {
+            let item = items[ i ];
+
+            delete item.i;
+
+            if ( ! item.hasOwnProperty( 'text' ) || '' === item.text ) {
+                items.splice( i, 1 );
+            }
+        }
+
+        return items;
     }
 
 }

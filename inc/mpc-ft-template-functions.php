@@ -21,7 +21,7 @@ function mpc_ft_get_todo_items() {
         return false;
     }
 
-    return get_post_meta( get_the_ID(), 'mpc_ft_todo_items', true );
+    return (array) get_post_meta( get_the_ID(), 'mpc_ft_todo_items', true );
 }
 
 function mpc_ft_todo_item_template() {
@@ -31,15 +31,13 @@ function mpc_ft_todo_item_template() {
     } ?>
 
     <script type="text/template" id="tmpl-mpc-ft-todo-item">
-        <li class="mpc-ft-todo__item" data-index="{{{ data.i }}}">
-            <div class="mpc-ft-todo__col-checkbox">
-                <input class="mpc-ft-todo__input-checkbox" type="checkbox" <# if ( data.item.checkbox ) { #>checked<# } #>>
-            </div>
-            <div class="mpc-ft-todo__col-text">
-                <input class="mpc-ft-todo__input-text" type="text" value="{{{ data.item.text }}}">
-            </div>
-            <button class="mpc-ft-todo__remove has-background" type="button" aria-label="<?php _e( 'Remove item', 'mpc-ft' ); ?>"></button>
-        </li>
+        <?php
+        $args = array(
+            'i'       => '{{{ data.i }}}',
+            'checked' => '<# if ( data.item.checkbox ) { #>checked<# } #>',
+            'text'    => '{{{ data.item.text }}}'
+        );
+        mpc_ft_get_template( 'parts/todo-item', $args ); ?>
     </script>
 
     <?php

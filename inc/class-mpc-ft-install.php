@@ -21,24 +21,35 @@ class MPC_FT_Install {
             return;
         }
 
-        // Post with WordPress UI
-        $post_id = wp_insert_post( array(
-            'post_title'   => 'ToDo with WordPress UI',
-            'post_type'    => 'mpc_ft_todo',
-            'post_status'  => 'publish',
-        ) );
+        $posts = array(
+            array(
+                'title' => 'ToDo with WordPress UI',
+                'meta'  => array(
+                    'mpc_ft_todo_items' => self::get_todo_dummy_items()
+                )
+            ),
+            array(
+                'title' => 'ToDo without WordPress UI',
+                'meta'  => array(
+                    'mpc_ft_todo_items' => self::get_todo_dummy_items(),
+                    'mpc_ft_hide_wp_ui' => 'on',
+                )
+            )
+        );
 
-        update_post_meta( $post_id, 'mpc_ft_todo_items', self::get_todo_dummy_items() );
+        foreach ( $posts as $post ) {
+            $post_id = wp_insert_post( array(
+                'post_title'   => $post['title'],
+                'post_type'    => 'mpc_ft_todo',
+                'post_status'  => 'publish',
+            ) );
 
-        // Post without WordPress UI
-        $post_id = wp_insert_post( array(
-            'post_title'   => 'ToDo without WordPress UI',
-            'post_type'    => 'mpc_ft_todo',
-            'post_status'  => 'publish',
-        ) );
-
-        update_post_meta( $post_id, 'mpc_ft_todo_items', self::get_todo_dummy_items() );
-        update_post_meta( $post_id, 'mpc_ft_hide_wp_ui', 'on' );
+            if ( ! empty( $post['meta'] ) ) {
+                foreach ( $post['meta'] as $meta_key => $meta_value ) {
+                    update_post_meta( $post_id, $meta_key, $meta_value );
+                }
+            }
+        }
     }
 
     public static function get_todo_dummy_items() {
