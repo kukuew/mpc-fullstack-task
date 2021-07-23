@@ -17,14 +17,20 @@ class MPC_FT_Meta_Box {
         add_meta_box( 'mpc-ft-settings', __( 'Settings', 'mpc-ft' ), 'MPC_FT_Meta_Box::output', 'mpc_ft_todo', 'normal' );
     }
 
-    public static function output( $post ) {
+    public static function output() {
 
         wp_nonce_field( MPC_FT_PLUGIN_BASENAME, 'mpc_ft_metabox_nonce' );
-        $checked = mpc_ft_is_wp_ui() ? 'checked' : ''; ?>
+        $hide_wp_ui = mpc_ft_is_wp_ui() ? 'checked' : '';
+        $use_react = mpc_ft_use_react() ? 'checked' : ''; ?>
 
         <p>
-            <input id="mpc-ft-hide-wp-ui" type="checkbox" name="mpc-ft-hide-wp-ui" <?php echo $checked; ?>>
-            <label for="mpc-ft-hide-wp-ui"><?php echo __( 'Hide WordPress UI', 'mpc-ft' ); ?></label>
+            <input id="mpc_ft_hide_wp_ui" type="checkbox" name="mpc_ft_hide_wp_ui" <?php echo $hide_wp_ui; ?>>
+            <label for="mpc_ft_hide_wp_ui"><?php echo __( 'Hide WordPress UI', 'mpc-ft' ); ?></label>
+        </p>
+
+        <p>
+            <input id="mpc_ft_use_react" type="checkbox" name="mpc_ft_use_react" <?php echo $use_react; ?>>
+            <label for="mpc_ft_use_react"><?php echo __( 'Use React', 'mpc-ft' ); ?></label>
         </p>
 
         <?php
@@ -41,16 +47,22 @@ class MPC_FT_Meta_Box {
             return $post_id;
         }
 
-        $meta_key = 'mpc_ft_hide_wp_ui';
-        $meta_value = get_post_meta( $post_id, $meta_key, true );
-        $new_meta_value = ( isset( $_POST['mpc-ft-hide-wp-ui'] ) ? sanitize_html_class( $_POST['mpc-ft-hide-wp-ui'] ) : '' );
+        $meta_keys = array(
+            'mpc_ft_hide_wp_ui',
+            'mpc_ft_use_react'
+        );
 
-        if ( ! empty( $new_meta_value ) && $new_meta_value !== $meta_value ) {
-            update_post_meta( $post_id, $meta_key, $new_meta_value );
-        }
+        foreach ( $meta_keys as $meta_key ) {
+            $meta_value = get_post_meta( $post_id, $meta_key, true );
+            $new_meta_value = ( isset( $_POST[ $meta_key ] ) ? sanitize_html_class( $_POST[ $meta_key ] ) : '' );
 
-        if ( empty( $new_meta_value ) && ! empty( $meta_value ) ) {
-            delete_post_meta( $post_id, $meta_key, $meta_value );
+            if ( ! empty( $new_meta_value ) && $new_meta_value !== $meta_value ) {
+                update_post_meta( $post_id, $meta_key, $new_meta_value );
+            }
+
+            if ( empty( $new_meta_value ) && ! empty( $meta_value ) ) {
+                delete_post_meta( $post_id, $meta_key, $meta_value );
+            }
         }
     }
 

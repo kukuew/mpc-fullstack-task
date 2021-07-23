@@ -24,3 +24,9 @@ function mpc_ft_is_wp_ui() {
 
     return 'on' === get_post_meta( $post->ID, 'mpc_ft_hide_wp_ui', true ) ? true : false;
 }
+
+function mpc_ft_use_react() {
+    global $post;
+
+    return 'on' === get_post_meta( $post->ID, 'mpc_ft_use_react', true ) ? true : false;
+}
