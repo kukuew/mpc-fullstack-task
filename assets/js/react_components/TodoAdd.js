@@ -7,7 +7,7 @@ function TodoAdd({todo, setTodo}) {
         let text = e.nativeEvent.target.elements.text.value
         let id = todo.length ? todo[todo.length - 1].id + 1 : 1
 
-        setTodo([...todo, {id, checkbox, text}])
+        setTodo([...todo, {checkbox, text, id}])
         e.nativeEvent.target.reset()
     }
 

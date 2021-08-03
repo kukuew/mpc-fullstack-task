@@ -23,14 +23,16 @@ $todo_items = mpc_ft_get_todo_items(); ?>
 
     <ul class="mpc-ft-todo__list js-mpc-ft-list">
         <?php
-        foreach ( $todo_items as $i => $item):
-            $args = array(
-                'i'       => $i,
-                'checked' => $item['checkbox'] ? 'checked' : '',
-                'text'    => $item['text']
-            );
-            mpc_ft_get_template( 'parts/todo-item', $args );
-        endforeach; ?>
+        if ( ( ! empty( array_filter( $todo_items ) ) ) ):
+            foreach ( $todo_items as $i => $item):
+                $args = array(
+                    'i'       => $i,
+                    'checked' => $item['checkbox'] ? 'checked' : '',
+                    'text'    => $item['text']
+                );
+                mpc_ft_get_template( 'parts/todo-item', $args );
+            endforeach;
+        endif; ?>
     </ul>
 
 </div>
