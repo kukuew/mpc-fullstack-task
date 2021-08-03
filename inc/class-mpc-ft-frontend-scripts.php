@@ -19,7 +19,12 @@ class MPC_FT_Frontend_Scripts {
 
         wp_enqueue_style( 'font_open_sans', 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap' );
         wp_enqueue_style( 'mpc_ft', self::get_asset_url( 'assets/css/main.min.css' ), '', MPC_FT_PLUGIN_VERSION );
-        wp_enqueue_script( 'mpc_ft', self::get_asset_url( 'assets/js/main.min.js' ), array( 'wp-util' ), MPC_FT_PLUGIN_VERSION, true );
+
+        if ( mpc_ft_use_react() ) {
+            wp_enqueue_script( 'mpc_ft', self::get_asset_url( 'assets/js/react.min.js' ), array( 'react', 'react-dom' ), MPC_FT_PLUGIN_VERSION, true );
+        } else {
+            wp_enqueue_script( 'mpc_ft', self::get_asset_url( 'assets/js/main.min.js' ), array( 'wp-util' ), MPC_FT_PLUGIN_VERSION, true );
+        }
 
         wp_localize_script( 'mpc_ft', 'mpc_ft', array(
             'ajax_url'   => admin_url( 'admin-ajax.php' ),

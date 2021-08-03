@@ -1,9 +1,9 @@
 const gulp = require( 'gulp' );
-const babel = require( 'gulp-babel' );
 const uglify = require( 'gulp-uglify' );
 const tap = require( 'gulp-tap' );
 const buffer = require( 'gulp-buffer' );
 const browserify = require( 'browserify' );
+const babelify = require( 'babelify' );
 const sass = require( 'gulp-sass' );
 const autoprefixer = require( 'gulp-autoprefixer' );
 const clean_css = require( 'gulp-clean-css' );
@@ -15,7 +15,8 @@ const css_files = [
 const js_files = [
     './assets/js/**/*.js',
     '!./assets/js/**/*.min.js',
-    '!./assets/js/modules/**/*.js'
+    '!./assets/js/modules/**/*.js',
+    '!./assets/js/react_components/**/*.js'
 ];
 
 const js_files_watch = [
@@ -27,16 +28,16 @@ const scripts = () => {
     return (
         gulp.src( js_files, {read: false} )
             .pipe( tap( ( file ) => {
-                file.contents = browserify( file.path ).bundle();
+                file.contents = browserify( file.path )
+                    .transform( babelify, {
+                        presets: [
+                            '@babel/preset-env',
+                            '@babel/preset-react'
+                        ]
+                    })
+                    .bundle();
             } ) )
             .pipe( buffer() )
-            .pipe( babel( {
-                presets: [
-                    [
-                        '@babel/env',
-                    ]
-                ]
-            } ) )
             .pipe( uglify() )
             .pipe( rename( { suffix: '.min' } ) )
             .pipe( gulp.dest( ( file ) => file.base ) )
