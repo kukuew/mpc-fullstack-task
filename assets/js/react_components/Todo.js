@@ -11,11 +11,7 @@ function Todo() {
         let data = new FormData()
         let items = [...todo]
 
-        items = items.map(el => {
-            delete el.id
-
-            return el;
-        })
+        items = items.map(({text, checkbox}) => ({text, checkbox}))
 
         data.append( 'action', 'mpc_ft_save_todo_items' )
         data.append( 'nonce', mpc_ft.nonce )
