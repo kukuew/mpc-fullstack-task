@@ -8,17 +8,24 @@ function Todo() {
     const [todo, setTodo] = useState(initValue)
 
     useEffect(() => {
-        let data = new FormData();
+        let data = new FormData()
+        let items = [...todo]
 
-        data.append( 'action', 'mpc_ft_save_todo_items' );
-        data.append( 'nonce', mpc_ft.nonce );
-        data.append( 'items', JSON.stringify( todo ) );
-        data.append( 'post_id', mpc_ft.post_id );
+        items = items.map(el => {
+            delete el.id
+
+            return el;
+        })
+
+        data.append( 'action', 'mpc_ft_save_todo_items' )
+        data.append( 'nonce', mpc_ft.nonce )
+        data.append( 'items', JSON.stringify( items ) )
+        data.append( 'post_id', mpc_ft.post_id )
 
         fetch( mpc_ft.ajax_url, {
             method: 'POST',
             body: data
-        } );
+        } )
     }, [todo])
 
     return (
